@@ -2,6 +2,24 @@ import React from "react";
 import saveIcon from "../assets/save.png";
 
 export default function BMIRight({ bmi }) {
+    let category = "";
+
+if (bmi) {
+  const value = Number(bmi);
+
+  if (value < 18.5) {
+    category = "Underweight";
+  } 
+  else if (value < 25) {
+    category = "Normal";
+  } 
+  else if (value < 30) {
+    category = "Overweight";
+  } 
+  else {
+    category = "Obesity";
+  }
+}
   return (
     <div className="p-4 md:p-6 w-full md:w-[420px]">
 
@@ -23,9 +41,9 @@ export default function BMIRight({ bmi }) {
         <span className="font-bold font-playfair text-xl md:text-2xl">
           BMI = {bmi ? `${bmi} kg/m²` : "--"}
         </span>
-        <span className="text-green-700 font-semibold ml-2 block md:inline">
-          (Normal)
-        </span>
+       <span className="text-green-700 font-semibold ml-2 block md:inline">
+  ({bmi ? category : "--"})
+</span>
       </div>
 
       {/* Gauge */}
