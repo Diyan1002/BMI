@@ -4,22 +4,43 @@ import saveIcon from "../assets/save.png";
 export default function BMIRight({ bmi }) {
     let category = "";
 
-if (bmi) {
-  const value = Number(bmi);
+    if (bmi) {
+      const value = Number(bmi);
+    
+      if (value < 18.5) {
+        category = "Underweight";
+      } 
+      else if (value < 25) {
+        category = "Normal";
+      } 
+      else if (value < 30) {
+        category = "Overweight";
+      } 
+      else {
+        category = "Obesity";
+      }
+    }
+    
+    // Calculate needle rotation based on BMI value
+    const calculateNeedleRotation = () => {
+        if (!bmi) return -90; // Default position (far left)
+        
+        const bmiValue = Number(bmi);
+        // BMI range: 16 to 40 (typical gauge range)
+        // Map to 0-180 degrees (from left to right)
+        const minBMI = 16;
+        const maxBMI = 40;
+        
+        // Clamp BMI value to range
+        const clampedBMI = Math.min(Math.max(bmiValue, minBMI), maxBMI);
+        
+        // Map BMI to degrees (0 to 180)
+        // 0 degrees = far left (16), 180 degrees = far right (40)
+        const degrees = ((clampedBMI - minBMI) / (maxBMI - minBMI)) * 180;
+        
+        return degrees - 90; // Subtract 90 because 0 degrees points right
+    };
 
-  if (value < 18.5) {
-    category = "Underweight";
-  } 
-  else if (value < 25) {
-    category = "Normal";
-  } 
-  else if (value < 30) {
-    category = "Overweight";
-  } 
-  else {
-    category = "Obesity";
-  }
-}
   return (
     <div className="p-4 md:p-6 w-full md:w-[420px]">
 
@@ -51,28 +72,33 @@ if (bmi) {
 
         <div className="relative w-[260px] h-[130px] md:w-[320px] md:h-[160px] overflow-hidden">
 
-          {/* Segmented Colors */}
+          {/* Segmented Colors - Corrected angles for half circle */}
           <div
             className="w-[260px] h-[260px] md:w-[320px] md:h-[320px] rounded-full"
             style={{
               background: `conic-gradient(
-                #8b0000 0deg 7.5deg,
-                #ff8fa3 7.5deg 10.75deg,
-                #ffd60a 18.75deg 30deg,
-                #2ecc71 30deg 67.5deg,
-                #ffd60a 67.5deg 105deg,
-                #ff8fa3 105deg 142.5deg,
-                #ff6b6b 142.5deg 165deg,
-                #8b0000 165deg 180deg
+                from 0deg at 50% 50%,
+                #8b0000 0deg 22.5deg,    /* 16-17 (0-22.5°) - Severe underweight */
+                #ff8fa3 22.5deg 45deg,    /* 17-18.5 (22.5-45°) - Underweight */
+                #ffd60a 45deg 67.5deg,    /* 18.5-20 (45-67.5°) - Lower normal */
+                #2ecc71 67.5deg 112.5deg, /* 20-30 (67.5-112.5°) - Normal to overweight start */
+                #ffd60a 112.5deg 135deg,  /* 30-35 (112.5-135°) - Overweight */
+                #ff8fa3 135deg 157.5deg,  /* 35-40 (135-157.5°) - Obesity */
+                #8b0000 157.5deg 180deg   /* 40+ (157.5-180°) - Severe obesity */
               )`
             }}
           />
 
-          {/* Inner White Circle */}
-          <div className="absolute top-[40px] md:top-[50px] left-1/2 -translate-x-1/2 w-[180px] h-[200px] md:w-[220px] md:h-[240px] bg-white rounded-full"></div>
+          {/* Inner White Circle - creates gauge effect */}
+          <div className="absolute top-[40px] md:top-[50px] left-1/2 -translate-x-1/2 w-[180px] h-[180px] md:w-[220px] md:h-[220px] bg-white rounded-full"></div>
 
-          {/* Needle */}
-          <div className="absolute bottom-2 left-1/2 w-[3px] h-[80px] md:h-[100px] bg-black origin-bottom rotate-[45deg]"></div>
+          {/* Needle - rotation based on BMI */}
+          <div 
+            className="absolute bottom-2 left-1/2 w-[3px] h-[80px] md:h-[100px] bg-black origin-bottom transition-transform duration-300"
+            style={{
+              transform: `translateX(-50%) rotate(${calculateNeedleRotation()}deg)`
+            }}
+          ></div>
 
           {/* Center Dot */}
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-3 md:w-4 md:h-4 bg-gray-500 rounded-full"></div>
@@ -82,7 +108,7 @@ if (bmi) {
             BMI = {bmi ? bmi : "--"}
           </div>
 
-          {/* Numbers */}
+          {/* Numbers - positioned around the gauge */}
           <span className="absolute left-[18px] md:left-[25px] bottom-[40px] md:bottom-[50px] text-[10px] md:text-xs">16</span>
           <span className="absolute left-[35px] md:left-[45px] bottom-[65px] md:bottom-[80px] text-[10px] md:text-xs">17</span>
           <span className="absolute left-[55px] md:left-[70px] bottom-[82px] md:bottom-[100px] text-[10px] md:text-xs">18.5</span>
@@ -92,7 +118,7 @@ if (bmi) {
           <span className="absolute right-[25px] md:right-[35px] bottom-[48px] md:bottom-[60px] text-[10px] md:text-xs">40</span>
 
           {/* Labels */}
-          <span className="absolute left-[-10px] md:left-[-18px] bottom-[65px] md:bottom-[80px] text-[9px] md:text-xs rotate-[-60deg]">
+          {/* <span className="absolute left-[-10px] md:left-[-18px] bottom-[65px] md:bottom-[80px] text-[9px] md:text-xs rotate-[-60deg]">
             Underweight
           </span>
 
@@ -106,7 +132,7 @@ if (bmi) {
 
           <span className="absolute right-[-5px] md:right-[-10px] bottom-[65px] md:bottom-[80px] text-[9px] md:text-xs rotate-[35deg]">
             Obesity
-          </span>
+          </span> */}
 
         </div>
       </div>
