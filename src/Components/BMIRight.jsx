@@ -75,18 +75,19 @@ export default function BMIRight({ bmi }) {
           {/* Segmented Colors - Corrected angles for half circle */}
           <div
             className="w-[260px] h-[260px] md:w-[320px] md:h-[320px] rounded-full"
-            style={{
-              background: `conic-gradient(
-                from 0deg at 50% 50%,
-                #8b0000 0deg 22.5deg,    /* 16-17 (0-22.5°) - Severe underweight */
-                #ff8fa3 22.5deg 45deg,    /* 17-18.5 (22.5-45°) - Underweight */
-                #ffd60a 45deg 67.5deg,    /* 18.5-20 (45-67.5°) - Lower normal */
-                #2ecc71 67.5deg 112.5deg, /* 20-30 (67.5-112.5°) - Normal to overweight start */
-                #ffd60a 112.5deg 135deg,  /* 30-35 (112.5-135°) - Overweight */
-                #ff8fa3 135deg 157.5deg,  /* 35-40 (135-157.5°) - Obesity */
-                #8b0000 157.5deg 180deg   /* 40+ (157.5-180°) - Severe obesity */
-              )`
-            }}
+           style={{
+  background: `conic-gradient(
+    from -30deg at 20% 50%,
+    #f87171 0deg 22.5deg,     /* 16-17 */
+    #34d399 22.5deg 45deg,    /* 17-18 */
+    #facc15 45deg 67.5deg,    /* 18-20 */
+    #8b0000 67.5deg 90deg,    /* 20-25 */
+    #60a5fa 90deg 112.5deg,   /* 25-30 */
+    #3b82f6 112.5deg 135deg,  /* 30-32.5 */
+    #8b5cf6 135deg 157.5deg,  /* 32.5-35 */
+    #8b0000 157.5deg 180deg   /* 35-40+ */
+  )`
+}}
           />
 
           {/* Inner White Circle - creates gauge effect */}
