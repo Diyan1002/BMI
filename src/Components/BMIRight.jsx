@@ -1,7 +1,7 @@
 import React from "react";
 import saveIcon from "../assets/save.png";
 
-export default function BMIRight() {
+export default function BMIRight({ bmi }) {
   return (
     <div className="p-4 md:p-6 w-full md:w-[420px]">
 
@@ -21,7 +21,7 @@ export default function BMIRight() {
       {/* BMI Text */}
       <div className="mt-3 text-[#222] text-center md:text-left">
         <span className="font-bold font-playfair text-xl md:text-2xl">
-          BMI = 23 kg/m²
+          BMI = {bmi ? `${bmi} kg/m²` : "--"}
         </span>
         <span className="text-green-700 font-semibold ml-2 block md:inline">
           (Normal)
@@ -61,7 +61,7 @@ export default function BMIRight() {
 
           {/* Center Text */}
           <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 text-lg md:text-2xl font-bold">
-            BMI = 23
+            BMI = {bmi ? bmi : "--"}
           </div>
 
           {/* Numbers */}
