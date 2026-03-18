@@ -10,7 +10,7 @@ export default function BMICalculatorHeader() {
         </button>
       </div>
 
-      <div className="w-full bg-[#5F86AB] text-white flex flex-col md:flex-row items-center h-auto md:h-12 px-4 py-2 md:py-0 shadow">
+      <div className="w-full bg-[#0A1F44] text-white flex flex-col md:flex-row items-center h-auto md:h-12 px-4 py-2 md:py-0 shadow">
 
         <div className="flex items-center justify-center w-10 md:ml-96 mb-2 md:mb-0">
           <div className="bg-white rounded-full w-7 h-7 flex items-center justify-center">
