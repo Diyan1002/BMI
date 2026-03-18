@@ -79,10 +79,10 @@ export default function BMIRight({ bmi }) {
   background: `conic-gradient(
     from -30deg at 20% 50%,
     #f87171 0deg 22.5deg,     /* 16-17 */
-    #6DB549 22.5deg 45deg,    /* replaced light green */
-    #0A1F44 45deg 67.5deg,    /* replaced yellow */
+    #34d399 22.5deg 45deg,    /* 17-18 */
+    #facc15 45deg 67.5deg,    /* 18-20 */
     #8b0000 67.5deg 90deg,    /* 20-25 */
-    #0A1F44 90deg 112.5deg,   /* replaced light blue */
+    #60a5fa 90deg 112.5deg,   /* 25-30 */
     #3b82f6 112.5deg 135deg,  /* 30-32.5 */
     #8b5cf6 135deg 157.5deg,  /* 32.5-35 */
     #8b0000 157.5deg 180deg   /* 35-40+ */
